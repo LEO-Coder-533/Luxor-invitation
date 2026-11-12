@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071b43">
+  <title>دعوة ندوة الهاكر الأخلاقي | الأقصر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#071b43; --blue:#0b3e83; --cyan:#19c9e8;
+      --gold:#d9aa4d; --cream:#fff9eb; --ink:#10264b;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh; color:#fff; font-family:"Cairo",Tahoma,Arial,sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%,rgba(18,153,210,.20),transparent 28%),
+        radial-gradient(circle at 85% 80%,rgba(217,170,77,.13),transparent 26%),
+        linear-gradient(135deg,#04112d,#092b5b 55%,#03112b);
+      overflow-x:hidden;
+    }
+    body:before{
+      content:""; position:fixed; inset:0; pointer-events:none; opacity:.13;
+      background-image:linear-gradient(30deg,transparent 48%,#42c8e9 49%,transparent 50%),
+                       linear-gradient(150deg,transparent 48%,#42c8e9 49%,transparent 50%);
+      background-size:74px 74px;
+      mask-image:linear-gradient(to bottom,black,transparent 85%);
+    }
+    .screen{display:none; min-height:100vh; position:relative; padding:34px 18px}
+    .screen.active{display:flex; align-items:center; justify-content:center}
+    .panel{
+      width:min(760px,100%); position:relative; padding:clamp(25px,5vw,52px);
+      border:1px solid rgba(105,218,244,.38); border-radius:28px;
+      background:linear-gradient(145deg,rgba(8,37,83,.94),rgba(3,18,48,.96));
+      box-shadow:0 25px 80px rgba(0,0,0,.42),inset 0 0 35px rgba(27,163,212,.08);
+      text-align:center; overflow:hidden;
+    }
+    .panel:before,.panel:after{
+      content:""; position:absolute; width:130px;height:130px; border:1px solid rgba(217,170,77,.38);
+      transform:rotate(45deg); pointer-events:none
+    }
+    .panel:before{top:-90px;right:-55px}.panel:after{bottom:-90px;left:-55px}
+    .eyebrow{color:#7ee9f5;font-size:13px;letter-spacing:2px;font-weight:800}
+    h1{font-size:clamp(30px,6vw,52px);line-height:1.35;margin:12px 0;color:#fff;font-weight:900}
+    .gold{color:#f0c66e}
+    .intro{color:#d4e7f8;line-height:2;margin:12px auto 28px;max-width:550px}
+    .field{text-align:right;max-width:490px;margin:0 auto}
+    label{display:block;margin-bottom:9px;color:#f3d38d;font-weight:700}
+    input{
+      width:100%;padding:16px 18px;border-radius:14px;border:1px solid rgba(126,233,245,.5);
+      outline:none;background:#f8fbff;color:#10264b;font:700 17px "Cairo",sans-serif;
+      transition:.2s
+    }
+    input:focus{border-color:#f0c66e;box-shadow:0 0 0 4px rgba(240,198,110,.17)}
+    button{
+      border:0;border-radius:14px;padding:13px 25px;margin-top:20px;cursor:pointer;
+      font:800 16px "Cairo",sans-serif;transition:transform .2s,filter .2s
+    }
+    button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+    .primary{background:linear-gradient(100deg,#e8bd65,#ffe3a0);color:#17284b;min-width:190px}
+    .secondary{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:#fff}
+    .error{min-height:25px;color:#ffb7b7;font-size:13px;margin-top:7px}
+    .small-note{font-size:12px;color:#a9c2dc;margin-top:18px}
+    .scarab{font-size:42px;margin-bottom:10px;filter:drop-shadow(0 0 14px rgba(25,201,232,.5))}
+    /* invitation */
+    .invite-wrap{width:min(1000px,100%);margin:auto}
+    .invite-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 0 18px}
+    .invite{
+      position:relative; overflow:hidden; color:var(--ink); background:var(--cream);
+      border:7px double #bd9447; outline:1px solid rgba(255,255,255,.5);
+      box-shadow:0 22px 65px rgba(0,0,0,.4); padding:clamp(18px,3vw,34px);
+      min-height:690px;
+    }
+    .invite:before{
+      content:"";position:absolute;inset:12px;border:1px solid rgba(184,139,53,.48);pointer-events:none
+    }
+    .invite:after{
+      content:"𓂀";position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);
+      font-size:clamp(180px,30vw,330px);color:rgba(9,61,112,.035);pointer-events:none
+    }
+    .top-logos{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;align-items:center}
+    .logo-box{height:105px;display:flex;align-items:center;justify-content:center;padding:5px}
+    .logo-box img{max-width:100%;max-height:100%;object-fit:contain}
+    .divider{height:2px;background:linear-gradient(90deg,transparent,#bd9447,#0d4b83,#bd9447,transparent);margin:16px 0 22px}
+    .invite-heading{text-align:center;position:relative;z-index:1}
+    .bism{font-family:"Amiri",serif;color:#9c702b;font-size:19px;margin-bottom:8px}
+    .org{font-size:clamp(14px,2vw,19px);font-weight:800;color:#164b78;line-height:1.8}
+    .label-pill{
+      display:inline-block;margin:15px 0 8px;padding:7px 24px;border-radius:30px;
+      color:#fff;background:linear-gradient(90deg,#0a376d,#116b9b);font-weight:800;font-size:15px
+    }
+    .event-title{
+      font-size:clamp(37px,7vw,70px);line-height:1.2;font-weight:900;color:#082d61;
+      text-shadow:2px 3px 0 rgba(217,170,77,.25);margin:4px 0 10px
+    }
+    .subtitle{font-family:"Amiri",serif;font-size:clamp(19px,3vw,27px);color:#a13e32;font-weight:700}
+    .body-copy{
+      position:relative;z-index:1;max-width:800px;margin:25px auto 18px;text-align:center;
+      font-size:clamp(16px,2.5vw,22px);line-height:2.1;font-weight:700;color:#17375f
+    }
+    .guest{
+      display:inline-block;color:#a13e32;font-weight:900;border-bottom:2px solid #d7ae5e;
+      padding:0 9px;min-width:100px
+    }
+    .event-details{
+      position:relative;z-index:1;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:22px 0
+    }
+    .detail{
+      min-width:210px;padding:12px 18px;border:1px solid #d6b66f;border-radius:14px;
+      background:rgba(255,255,255,.72);color:#123b69;font-weight:800
+    }
+    .detail span{display:block;color:#a16d25;font-size:12px;margin-bottom:3px}
+    .bottom-line{position:relative;z-index:1;text-align:center;margin-top:24px;color:#49627e;font-size:13px;font-weight:700}
+    .ankh{color:#b38a3d;font-size:24px;margin:5px}
+    @media(max-width:620px){
+      .screen{padding:18px 10px}.top-logos{grid-template-columns:repeat(2,1fr);gap:3px}
+      .logo-box{height:76px}.invite{padding:15px;min-height:unset;border-width:5px}
+      .body-copy{margin:17px auto 12px}.detail{min-width:100%;padding:9px}
+      .invite-actions button{margin-top:0;flex:1}
+    }
+    @media print{
+      @page{size:A4 portrait;margin:8mm}
+      body{background:#fff!important}
+      body:before,.invite-actions,.no-print{display:none!important}
+      .screen{display:none!important;min-height:0;padding:0}
+      #inviteScreen{display:block!important}
+      .invite-wrap{width:100%;margin:0}
+      .invite{box-shadow:none;border-width:5px;min-height:0;padding:20px}
+      .top-logos{grid-template-columns:repeat(4,1fr)}
+      .logo-box{height:85px}
+      .event-title{font-size:48px}
+      .body-copy{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="screen active" id="nameScreen">
+      <div class="panel">
+        <div class="scarab">𓆣</div>
+        <div class="eyebrow">LUXOR • DIGITAL AWARENESS</div>
+        <h1>دعوتك إلى عالم<br><span class="gold">الهاكر الأخلاقي</span></h1>
+        <p class="intro">خطوة واحدة تفصلك عن دعوتك الشخصية لحضور الندوة التثقيفية.<br>اكتب اسمك كما تحب أن يظهر على بطاقة الدعوة.</p>
+        <form id="nameForm" class="field">
+          <label for="guestName">الاسم بالكامل</label>
+          <input id="guestName" type="text" maxlength="55" placeholder="اكتب اسمك هنا..." autocomplete="name" required>
+          <div class="error" id="errorMsg" aria-live="polite"></div>
+          <button class="primary" type="submit">إنشاء بطاقة الدعوة ✦</button>
+        </form>
+        <div class="small-note">وحدة السكان بديوان عام محافظة الأقصر • بالتعاون مع شركاء الندوة</div>
+      </div>
+    </section>
+
+    <section class="screen" id="inviteScreen">
+      <div class="invite-wrap">
+        <div class="invite-actions">
+          <button class="secondary" id="editBtn">تعديل الاسم</button>
+          <button class="secondary" id="printBtn">طباعة البطاقة</button>
+          <button class="primary" id="pngBtn">تحميل PNG</button>
+        </div>
+        <article class="invite" id="invitationCard">
+          <div class="top-logos">
+            <div class="logo-box"><img src="luxor-population.jpg" alt="شعار وحدة السكان بمحافظة الأقصر"></div>
+            <div class="logo-box"><img src="kayan-youth.jpg" alt="شعار كيان اتحاد شباب الأقصر"></div>
+            <div class="logo-box"><img src="misr-public-library.jpg" alt="شعار مكتبة مصر العامة"></div>
+            <div class="logo-box"><img src="luxor-governorate.jpg" alt="شعار الأقصر المرفق"></div>
+          </div>
+          <div class="divider"></div>
+          <header class="invite-heading">
+            <div class="bism">𓂀 &nbsp; دعوة كريمة لحضور ندوة تثقيفية &nbsp; 𓂀</div>
+            <div class="org">وحدة السكان بديوان عام محافظة الأقصر<br>بالتعاون مع مكتبة مصر العامة وكيان اتحاد شباب الأقصر</div>
+            <div class="label-pill">ندوة توعوية متخصصة</div>
+            <h2 class="event-title">الهاكر الأخلاقي</h2>
+            <div class="subtitle">وعي رقمي • حماية • مسؤولية</div>
+          </header>
+          <p class="body-copy">
+            تتشرف وحدة السكان بديوان عام محافظة الأقصر، وبالتعاون مع مكتبة مصر العامة وكيان اتحاد شباب الأقصر، بدعوة
+            <span class="guest" id="guestOutput">اسم المدعو</span>
+            لحضور الندوة التثقيفية <strong>«الهاكر الأخلاقي»</strong>.
+          </p>
+          <div class="event-details">
+            <div class="detail"><span>موعد الندوة</span>يوم الاثنين المقبل</div>
+            <div class="detail"><span>التوقيت</span>الساعة ٦ مساءً</div>
+          </div>
+          <div class="bottom-line">
+            <div class="ankh">𓋹</div>
+            المعرفة خط الدفاع الأول في العالم الرقمي
+            <div>نتشرف بحضوركم ومشاركتكم</div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    const nameForm = document.getElementById('nameForm');
+    const nameInput = document.getElementById('guestName');
+    const errorMsg = document.getElementById('errorMsg');
+    const nameScreen = document.getElementById('nameScreen');
+    const inviteScreen = document.getElementById('inviteScreen');
+    const guestOutput = document.getElementById('guestOutput');
+    const card = document.getElementById('invitationCard');
+
+    nameForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const name = nameInput.value.trim().replace(/\s+/g, ' ');
+      if (!name) {
+        errorMsg.textContent = 'من فضلك اكتب الاسم أولاً.';
+        nameInput.focus();
+        return;
+      }
+      guestOutput.textContent = name;
+      errorMsg.textContent = '';
+      nameScreen.classList.remove('active');
+      inviteScreen.classList.add('active');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+
+    document.getElementById('editBtn').addEventListener('click', () => {
+      inviteScreen.classList.remove('active');
+      nameScreen.classList.add('active');
+      nameInput.focus();
+    });
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+    document.getElementById('pngBtn').addEventListener('click', async () => {
+      const button = document.getElementById('pngBtn');
+      const oldText = button.textContent;
+      if (typeof html2canvas !== 'function') {
+        alert('تعذر تحميل أداة حفظ PNG. استخدم زر «طباعة البطاقة» ثم اختر «حفظ كملف PDF».');
+        return;
+      }
+      button.disabled = true;
+      button.textContent = 'جارٍ تجهيز البطاقة...';
+      try {
+        await document.fonts.ready;
+        const canvas = await html2canvas(card, {
+          scale: 2, useCORS: true, backgroundColor: '#fff9eb',
+          imageTimeout: 15000, logging: false
+        });
+        const link = document.createElement('a');
+        const safeName = (guestOutput.textContent || 'guest').replace(/[^\u0600-\u06FF\w-]+/g, '_');
+        link.download = `دعوة-الهاكر-الأخلاقي-${safeName}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      } catch (error) {
+        console.error(error);
+        alert('لم نتمكن من تصدير PNG. تأكد من فتح الموقع عبر خادم محلي، ثم جرّب مرة أخرى. ويمكنك استخدام الطباعة لحفظ البطاقة PDF.');
+      } finally {
+        button.disabled = false;
+        button.textContent = oldText;
+      }
+    });
+  </script>
+</body>
+</html>
